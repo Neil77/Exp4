@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Order - Nested Callbacks</title>
+</head>
+
+<body>
+
+    <h1>Food Ordering System</h1>
+
+    <button onclick="startOrder()">Start Order</button>
+
+    <p id="result"></p>
+
+    <script>
+
+        function selectFood(callback) {
+            document.getElementById("result").innerHTML +=
+                "Food selected: Pizza<br>";
+
+            callback();
+        }
+
+        function confirmOrder(callback) {
+            document.getElementById("result").innerHTML +=
+                "Order confirmed successfully<br>";
+
+            callback();
+        }
+
+        function prepareFood(callback) {
+            document.getElementById("result").innerHTML +=
+                "Food is being prepared<br>";
+
+            callback();
+        }
+
+        function assignDeliveryPartner(callback) {
+            document.getElementById("result").innerHTML +=
+                "Delivery partner assigned<br>";
+
+            callback();
+        }
+
+        function deliverFood() {
+            document.getElementById("result").innerHTML +=
+                "Food delivered successfully!";
+        }
+
+        function startOrder() {
+
+            document.getElementById("result").innerHTML = "";
+
+            // Nested callbacks
+            selectFood(function() {
+
+                confirmOrder(function() {
+
+                    prepareFood(function() {
+
+                        assignDeliveryPartner(function() {
+
+                            deliverFood();
+
+                        });
+
+                    });
+
+                });
+
+            });
+        }
+
+    </script>
+
+</body>
+</html>
