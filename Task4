@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+
+<body>
+
+    <h1>Registration Form</h1>
+
+    <form onsubmit="return validateForm()">
+
+        Name:
+        <input type="text" id="name">
+        <br><br>
+
+        Mobile Number:
+        <input type="text" id="mobile">
+        <br><br>
+
+        Email:
+        <input type="text" id="email">
+        <br><br>
+
+        Password:
+        <input type="password" id="password">
+        <br><br>
+
+        Confirm Password:
+        <input type="password" id="confirmPassword">
+        <br><br>
+
+        Gender:
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+        <br><br>
+
+        <input type="submit" value="Register">
+
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+
+        function validateForm() {
+
+            let name = document.getElementById("name").value;
+            let mobile = document.getElementById("mobile").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            let gender = document.querySelector(
+                'input[name="gender"]:checked'
+            );
+
+            // Check name
+            if (name == "") {
+                alert("Please enter your name");
+                return false;
+            }
+
+            // Check mobile number
+            if (mobile == "" || mobile.length != 10 || isNaN(mobile)) {
+                alert("Please enter a valid 10-digit mobile number");
+                return false;
+            }
+
+            // Check email
+            if (email == "" || !email.includes("@")) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            // Check password
+            if (password == "") {
+                alert("Please enter a password");
+                return false;
+            }
+
+            // Check confirm password
+            if (confirmPassword == "") {
+                alert("Please confirm your password");
+                return false;
+            }
+
+            // Check whether passwords match
+            if (password != confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+
+            // Check gender
+            if (gender == null) {
+                alert("Please select your gender");
+                return false;
+            }
+
+            // If all validations are successful
+            document.getElementById("message").innerHTML =
+                "Registration successful!";
+
+            return false;
+        }
+
+    </script>
+
+</body>
+</html>
