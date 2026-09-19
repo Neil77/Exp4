@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Counter</title>
+</head>
+
+<body>
+
+    <h1>Character Counter</h1>
+
+    <label>Enter Text:</label>
+    <input type="text" id="textBox">
+
+    <p>Characters entered: <span id="count">0</span></p>
+
+    <script>
+        const textBox = document.getElementById("textBox");
+        const count = document.getElementById("count");
+
+        textBox.addEventListener("input", function() {
+            count.innerHTML = textBox.value.length;
+        });
+    </script>
+
+</body>
+</html>
