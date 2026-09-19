@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Text Change</title>
+</head>
+
+<body>
+
+    <h1>Button Example</h1>
+
+    <button onclick="changeText(this)">Submit</button>
+    <button onclick="changeText(this)">Cancel</button>
+    <button onclick="changeText(this)">Reset</button>
+
+    <script>
+        function changeText(button) {
+            button.innerHTML = "Clicked!";
+        }
+    </script>
+
+</body>
+</html>
