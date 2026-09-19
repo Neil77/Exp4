@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Shopping - Promise Chaining</title>
+</head>
+
+<body>
+
+    <h1>Online Shopping</h1>
+
+    <label>Select Product:</label>
+
+    <select id="product">
+        <option value="">-- Select Product --</option>
+        <option value="Wireless Headphones">Wireless Headphones</option>
+        <option value="Smart Watch">Smart Watch</option>
+        <option value="Bluetooth Speaker">Bluetooth Speaker</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="startOrder()">Place Order</button>
+
+    <p id="result"></p>
+
+    <script>
+
+        function selectProduct() {
+            return new Promise(function(resolve, reject) {
+
+                let product = document.getElementById("product").value;
+
+                if (product == "") {
+                    reject("Please select a product");
+                } else {
+                    resolve(product);
+                }
+
+            });
+        }
+
+
+        function checkAvailability(product) {
+            return new Promise(function(resolve) {
+
+                resolve(product + " is available");
+            });
+        }
+
+
+        function addToCart(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Product added to cart");
+            });
+        }
+
+
+        function makePayment(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Payment successful");
+            });
+        }
+
+
+        function generateConfirmation(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Order confirmation generated!");
+            });
+        }
+
+
+        function startOrder() {
+
+            document.getElementById("result").innerHTML = "";
+
+            selectProduct()
+
+                .then(function(product) {
+
+                    document.getElementById("result").innerHTML =
+                        "Product selected: " + product + "<br>";
+
+                    return checkAvailability(product);
+
+                })
+
+                .then(function(message) {
+
+                    document.getElementById("result").innerHTML +=
+                        message + "<br>";
+
+                    return addToCart(message);
+
+                })
+
+                .then(function(message) {
+
+                    document.getElementById("result").innerHTML +=
+                        "Product added to cart<br>";
+
+                    return makePayment(message);
+
+                })
+
+                .then(function(message) {
+
+                    document.getElementById("result").innerHTML +=
+                        "Payment successful<br>";
+
+                    return generateConfirmation(message);
+
+                })
+
+                .then(function(message) {
+
+                    document.getElementById("result").innerHTML +=
+                        "Order confirmation generated!";
+
+                })
+
+                .catch(function(error) {
+
+                    document.getElementById("result").innerHTML =
+                        error;
+
+                });
+        }
+
+    </script>
+
+</body>
+</html>
