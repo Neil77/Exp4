@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Bill Calculator</title>
+</head>
+
+<body>
+
+    <h1>Product Bill Calculator</h1>
+
+    <button onclick="calculateBill()">Calculate Bill</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateBill() {
+
+            // Array of product prices
+            let prices = [500, 1200, 800, 1500, 700];
+
+            // Calculate total bill
+            let total = 0;
+
+            for (let price of prices) {
+                total = total + price;
+            }
+
+            // Discount condition
+            let discount = 0;
+
+            if (total > 4000) {
+                discount = total * 0.10;   // 10% discount
+            }
+
+            // Calculate final amount
+            let finalAmount = total - discount;
+
+            // Display result
+            document.getElementById("result").innerHTML =
+                "Product Prices: ₹" + prices.join(", ₹") +
+                "<br>Total Bill: ₹" + total +
+                "<br>Discount: ₹" + discount +
+                "<br>Final Amount: ₹" + finalAmount;
+        }
+    </script>
+
+</body>
+</html>
