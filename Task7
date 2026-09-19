@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Booking System</title>
+</head>
+
+<body>
+
+    <h1>Movie Booking System</h1>
+
+    <label>Select Movie:</label>
+
+    <select id="movie">
+        <option value="">-- Select Movie --</option>
+        <option value="Avengers">Avengers</option>
+        <option value="Interstellar">Interstellar</option>
+        <option value="Inception">Inception</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="bookMovie()">Book Ticket</button>
+
+    <p id="result"></p>
+
+    <script>
+
+        function selectMovie() {
+            return new Promise(function(resolve, reject) {
+
+                let movie = document.getElementById("movie").value;
+
+                if (movie == "") {
+                    reject("Please select a movie");
+                } else {
+                    resolve(movie);
+                }
+
+            });
+        }
+
+
+        function checkSeatAvailability(movie) {
+            return new Promise(function(resolve, reject) {
+
+                let seatsAvailable = true;
+
+                if (seatsAvailable) {
+                    resolve(movie + " - Seat is available");
+                } else {
+                    reject("Sorry, no seats are available");
+                }
+
+            });
+        }
+
+
+        function reserveSeat(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Seat reserved successfully");
+
+            });
+        }
+
+
+        function makePayment(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Payment successful");
+
+            });
+        }
+
+
+        function generateTicket(message) {
+            return new Promise(function(resolve) {
+
+                resolve(message + "<br>Ticket generated successfully!");
+
+            });
+        }
+
+
+        async function bookMovie() {
+
+            document.getElementById("result").innerHTML = "";
+
+            try {
+
+                // Select Movie
+                let movie = await selectMovie();
+
+                document.getElementById("result").innerHTML =
+                    "Movie selected: " + movie + "<br>";
+
+                // Check Seat Availability
+                let availability = await checkSeatAvailability(movie);
+
+                document.getElementById("result").innerHTML +=
+                    availability + "<br>";
+
+                // Reserve Seat
+                let reservation = await reserveSeat(availability);
+
+                document.getElementById("result").innerHTML +=
+                    "Seat reserved successfully<br>";
+
+                // Make Payment
+                let payment = await makePayment(reservation);
+
+                document.getElementById("result").innerHTML +=
+                    "Payment successful<br>";
+
+                // Generate Ticket
+                await generateTicket(payment);
+
+                document.getElementById("result").innerHTML +=
+                    "Ticket generated successfully!";
+
+            }
+
+            catch (error) {
+
+                document.getElementById("result").innerHTML =
+                    "Error: " + error;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
